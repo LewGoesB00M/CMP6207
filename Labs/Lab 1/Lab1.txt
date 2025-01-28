@@ -1,0 +1,3 @@
+Lab 1 was a tiny introductory lab for HTML, CSS and JS.
+There weren't dedicated tasks to do, but rather the sample ones on W3Schools.
+For some reason, W3Schools quizzes fail to render on Laptop Firefox?

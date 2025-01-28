@@ -16,6 +16,7 @@
 \usepackage{float}  % Allows for floats to be positioned using [H], which correctly
                     % positions them relative to their location within my LaTeX code.
 \usepackage{subcaption}
+\usepackage{csquotes}
 
 % -------------------------------------------------------------------------------
 % Declare biblatex with custom Harvard BCU styling for referencing.
@@ -104,7 +105,7 @@
 
 \title{Untitled CMP6207 Report}
 \author{Lewis Higgins - Student ID 22133848}
-\date{Unknown, 2025}
+\date{March (?), 2025}
 
 % -------------------------------------------------------------------------------
 
@@ -115,11 +116,11 @@
 \begin{titlepage}
     \begin{center}
         \includegraphics[width=0.7\linewidth]{BCU}\\[4ex]
-        {\huge \bfseries CMP6207 - Unknown Assignment}\\[2ex]
+        {\huge \bfseries CMP6207 - Assignment 1}\\[2ex]
         {\large \bfseries  \@title}\\[50ex]
         {\@author}\\[2ex]
         {CMP6207 - Modern Data Stores}\\[2ex]
-        {Module Coordinator: ???}\\[10ex]
+        {Module Coordinator: Abdel-Rahman Tawil}\\[5ex]
     \end{center}
 \end{titlepage}
 \makeatother
@@ -135,7 +136,50 @@
 
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
-This report covers something maybe
+The report will be based on the design and implementation of a MongoDB NoSQL database system 
+for the company "IoThings Home Automation Solutions", and its detailed brief containing the deadline
+will become available during Week 2. There are two assignments in this module, where this report is
+worth \textbf{60\%}, and a presentation (relating to code?) is the remaining \textbf{40\%}. This module 
+will also incorporate elements of web design, with HTML and CSS also playing a role alongside the primary 
+use of JavaScript.
+
+\para \textbf{Work on this report is expected to fully begin in Week 4, or potentially even earlier within Week 2. 
+A draft of this report may be due in Week 7.}
+
+\chapter*{Module plan}
+\begin{itemize}
+    \item As minor occurrences happen, such as the installation of MongoDB, log them here.
+    \item The timetabling of this module means that there's not much point trying to get ahead.
+    \begin{itemize}
+        \item This is partially a benefit, as it means you have time for CMP6228 and CMP6200.
+    \end{itemize}
+    \item (Currently, not much can be said here due to the brief not being available yet.)
+    \item Konstas cares more for the functionality over aesthetics. While you should put effort into 
+    the HTML and CSS parts, they're a lesser concern than the overall usability of the system.
+\end{itemize}
+
+\section*{Coding conventions}
+
+\textbf{There are expected coding conventions within this module, though they are how you would 
+code anyway. camelCase, spaces when assigning variables and between array contents ["Space", "Expected before me"].
+Code must be indented to the relevant level which is likely handled by VSCode. Your lines should not exceed 
+80 characters, and you may need to get a JS linter to enforce this. Your code should be commented.}
+
+\vspace{10pt}
+
+\subsubsection{Expected function format}
+
+\begin{verbatim}
+    function toCelsius(fahrenheit) {
+        return (5 / 9) * (fahrenheit - 32);
+    }
+\end{verbatim}
+
+\chapter{Database comparisons}
+\begin{itemize}
+    \item Compare types of databases here, ultimately ending on why MongoDB 
+    is their best option.
+\end{itemize}
 
 
 \chapter*{Conclusion}
