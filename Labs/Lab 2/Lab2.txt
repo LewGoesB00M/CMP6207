@@ -1,0 +1,5 @@
+MongoDB Community Server does NOT include the Mongo shell, which then needs to be installed seperately.
+For convenience, the shell should be added to PATH to ensure it can be run from any CMD window.
+
+MongoDB VSCode extension provides a nice compatibility layer that allows you to immediately run files against the 
+DB from within VSCode. I don't know how to do it without the extension, so that'll need researching.
