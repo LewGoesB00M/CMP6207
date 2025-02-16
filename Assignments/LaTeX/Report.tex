@@ -103,9 +103,9 @@
 \newcommand{\para}{\vspace{7pt}\noindent}
 % -------------------------------------------------------------------------------
 
-\title{Untitled CMP6207 Report}
+\title{IOThings Application Report}
 \author{Lewis Higgins - Student ID 22133848}
-\date{March (?), 2025}
+\date{May 2025}
 
 % -------------------------------------------------------------------------------
 
@@ -137,75 +137,111 @@
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 The report will be based on the design and implementation of a MongoDB NoSQL database system 
-for the company "IoThings Home Automation Solutions", and its detailed brief containing the deadline
-will become available during Week 2. There are two assignments in this module, where this report is
-worth \textbf{60\%}, and a presentation (relating to code?) is the remaining \textbf{40\%}. This module 
+for the company "IoThings Home Automation Solutions". There are two assignments in this module, where this report is
+worth \textbf{60\%}, and a presentation is the remaining \textbf{40\%}. This module 
 will also incorporate elements of web design, with HTML and CSS also playing a role alongside the primary 
 use of JavaScript.
 
-\para \textbf{Work on this report is expected to fully begin in Week 4, or potentially even earlier within Week 2. 
-A draft of this report may be due in Week 7.}
-
-\chapter*{Module plan}
 \begin{itemize}
-    \item As minor occurrences happen, such as the installation of MongoDB, log them here.
-    \item The timetabling of this module means that there's not much point trying to get ahead.
-    \begin{itemize}
-        \item This is partially a benefit, as it means you have time for CMP6228 and CMP6200.
-    \end{itemize}
-    \item Kostas cares more for the functionality over aesthetics. While you should put effort into 
+    \item Konstas cares more for the functionality over aesthetics. While you should put effort into 
     the HTML and CSS parts, they're a lesser concern than the overall usability of the system.
     \item A literature review is expected in this report.
     \item 4,000 word count, so 4,400 hard limit.
     \item The presentation is about this report. It must cover the design, implementation and data management.
     \begin{itemize}
-        \item You would show him your database cluster as part of it.
+        \item You would show him your database cluster (local or Atlas?) as part of it.
     \end{itemize}
     \item IT WILL BE THIRTY MINUTES. If the report contains all the screenshots (which it will) you might not need 
     to make slides, though consider it anyway. You can still show the report alongside the slides where needed.
-    \item He wants you to make an Atlas account even if you do it locally. 
+    \item He wants you to make an Atlas account even if you do it locally.
+    \item You are creating the dataset for this assignment. You will describe it in an appendix rather than 
+    the report's main body.
+    \item This is a "professional report", and as such the title page with the BCU logo and your info should 
+    probably change. It needs to also show the date.
 \end{itemize}
 
-\section*{Coding conventions}
-
-\textbf{There are expected coding conventions within this module, though they are how you would 
-code anyway. camelCase, spaces when assigning variables and between array contents ["Space", "Expected before me"].
-Code must be indented to the relevant level which is likely handled by VSCode. Your lines should not exceed 
-80 characters, and you may need to get a JS linter to enforce this. Your code should be commented.}
-
-\vspace{10pt}
-
-\subsubsection{Expected function format}
-
-\begin{verbatim}
-    function toCelsius(fahrenheit) {
-        return (5 / 9) * (fahrenheit - 32);
-    }
-\end{verbatim}
-
-\chapter{Database comparisons}
-\begin{itemize}
-    \item Compare types of NoSQL databases here.
-    \item This section "shouldn't be too long, but enough to convince them."
-\end{itemize}
+\chapter{Types of NoSQL databases}
 
 \noindent Structured Query Language, or SQL, was developed by IBM following \textcite{codd_relational_1970}'s groundbreaking 
 publication in the ACM journal, with the first commercial SQL implementation being published by Oracle in 1979 \autocite{oracle_history_nodate}.
 SQL powers many relational database systems even today, though the problems associated with its age, most notably in 
 the speed of its operations, are beginning to show in modern systems. Therefore, NoSQL ("Not Only SQL") was developed as 
-a new form of database that stores data in a non-tabular, non-relational format which work to efficiently store 
+an extension of SQL, allowing data to be stored in a non-tabular, non-relational format for efficient storage of
 semi-structured and unstructured data in a flexible, functional and scalable model for faster operations than standard 
-relational databases in most scenarios \autocite{google_cloud_what_nodate, aws_what_nodate}. 
+relational databases in most scenarios \autocite{google_cloud_what_nodate, aws_what_nodate}. There are a wide variety of NoSQL 
+database types which vary in complexity, functionality and purpose, meaning that identification of the most suitable type is paramount 
+for maximum efficiency. 
 
-MongoDB, an acronym from "hu\textbf{mongo}us DB", aims to address some of SQL's key issues through its 
+\section{Document database}
+% ? MongoDB is a document database.
+% * General purpose databases.
+Document databases are intuitive, flexible and horizontally scalable databases that work well in a wide variety of general purpose use cases.
+They store records as "documents", which store an object's data and metadata, in a format such as JSON
+\footnote{JavaScript Object Notation}, BSON \footnote{Binary JSON}, or XML \footnote{Extensible Markup Language}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{NoSQL DBs/Doc/ExampleDoc}
+    \caption{An example of a JSON Document.\label{fig:ExampleDoc}}
+\end{figure}
+
+\noindent Figure \ref{fig:ExampleDoc} depicts an example JSON document of a school teacher stored in MongoDB, a popular DBMS
+for document databases. Within it, the internal object ID (metadata) is stored, as well as other data of varying types including 
+strings, integers and arrays. This makes document databases easily integratable into a development workflow due to the direct 
+storage of object types typically used in programming languages like Python and JavaScript.
+
+
+
+
+\section{Key-value database}
+% * Very fast, very simple.
+
+\section{Column-oriented database}
+% * Stores data in columns rather than rows.
+% * Fast reading, slow writing. 
+% * Better for OLAP than OLTP iirc.
+% ! In the scenario, the slow writing means it's unwanted. Client wants IoT sensor data recorded, so it'll be lots of writing.
+
+
+\section{Graph database}
+% ? Neo4J is a graph database.
+
+
+\section{In-memory database}
+% ? Redis is an in-memory database.
+% ! While that's true, it's also a key-value database.
+
+
+\chapter{Comparing NoSQL and Relational databases} 
+% ! Chapter title doesn't fit the page.
+\begin{itemize}
+    \item Compare types of NoSQL databases here.
+    \item This section "shouldn't be too long, but enough to convince them."
+    \item \textbf{This is NOT comparing \textit{MongoDB} to relational databases.} The brief 
+    mentions that it should be "generic just in case after seeing your MongoDB database
+    they decide to go with another software provider."
+\end{itemize}
+  
+
+% Assuming this is probably the longest chapter.
+\include{Body/Database}
+% ! I want to be up to this point by Feb 28th.
+
+\chapter{API Implementation and Documentation}
+
 
 \chapter*{Conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
+% ! I want to be done with this report by April 14th, with the 
+% ! April 29 - May 4 window being for final improvements and presentation prep.
 
 Overall, something was done\dots
 
 
+
 \printbibliography
 \addcontentsline{toc}{chapter}{Bibliography}
+
+
 
 \end{document}

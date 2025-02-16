@@ -1,3 +1,9 @@
+// THIS FILE DOCUMENTS ALL THE COMMANDS USED, 
+// THOUGH RUNNING THIS FILE WILL ONLY YIELD THE OUTPUT
+// OF THE FINAL COMMAND. Nevertheless, all commands 
+// are run, which can be clearly seen by querying the DB 
+// in another terminal.
+
 use("faculty");
 
 // Create 100 students with randomised scores.
@@ -34,15 +40,17 @@ db.scores.find(
 db.scores.updateMany(
     {type: "quiz"},
     {$set: {score: 0}}
-)
+);
 
 // Counts everyone with homework scores over 50.
-
-/*db.scores.find(
-    {type: "homework"},
-    {score: {$gte: 50}}
-)
-    DOESN'T WORK. */
+db.scores.countDocuments(
+    {$and: 
+        [
+            {score: {$gte: 50}},
+            {type: "homework"}
+        ]
+    }
+);
 
 // Creates the staff collection with some sample data.
 db.staff.insertMany([
@@ -107,4 +115,38 @@ db.staff.updateMany(
 db.staff.updateOne(
     {name: "Stiv"},
     {$set: {qualification: "Ph.D", type: "Full Time"}}
-)
+);
+
+// Updates all maths teachers to also teach PSK.
+db.staff.updateMany(
+    {subjects: {$in: ["MATHS"]}},
+    {$push: {subjects: "PSK"}}
+);
+
+// Removes all staff over 55.
+// There actually aren't any.
+db.staff.deleteMany(
+    {age: {$gt: 55}}
+);
+
+// Outputs all staff names and qualifications.
+db.staff.find(
+    {}, // No condition, find all.
+    // Don't return any columns other than name and qualification.
+    {_id: 0, name: 1, qualification: 1} 
+);
+
+// Seems you can use "true" boolean or 0/1.
+
+// Returns an ascending-sorted list in order of experience
+// of all staff names, qualifications and experience.
+db.staff.find(
+    {},
+    {_id: 0, name: 1, qualification: 1, exp: 1} 
+).sort(
+    {exp: 1}
+);
+
+// Finds the top 5 staff ages by sorting in descending order.
+db.staff.find().sort({age: -1}).limit(5);
+// 1 ascending, -1 descending.

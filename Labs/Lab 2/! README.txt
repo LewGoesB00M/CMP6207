@@ -1,0 +1,2 @@
+Although technically unfinished, this lab is almost entirely irrelevant in the grander scheme.
+Lab 3 was a demo of Mongo interactions with JS, and is an extremely useful information source instead of this one.
