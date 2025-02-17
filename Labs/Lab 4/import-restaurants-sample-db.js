@@ -10,8 +10,6 @@ const fs = require('fs/promises');
 
 // DB and Output File Settings
 //###################################################################//
-// Connection string for Atlas (edit username, password and servername accordingly)
-//const connectionString = "mongodb+srv://username:password@servername.mongodb.net";
 const connectionString = "mongodb://localhost";
 const dbName = "sample_restaurants";
 const collectionName = "restaurants";
