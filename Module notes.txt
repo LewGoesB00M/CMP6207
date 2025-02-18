@@ -1,8 +1,0 @@
-W1:
-    ACID Properties:
-        Atomic - Transaction takes place (commit) or does not (abort)
-        Consistency - The database must remain consistent before and after transactions.
-        Isolation - Multiple transactions should be able to occur independently with no interference.
-        Durability - The changes made as part of a successful transaction occur even if there are system errors.
-
-    NoSQL means "Not Only SQL".

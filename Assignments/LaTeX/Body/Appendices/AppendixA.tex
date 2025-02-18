@@ -1,0 +1,40 @@
+\begingroup
+\renewcommand\thechapter{A}
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{}{20pt}{\Huge}
+\setcounter{section}{0}
+\setcounter{figure}{0} 
+
+\chapter*{Appendix A - Data types}
+\addcontentsline{toc}{chapter}{Appendix A - Data types}
+
+The types of data stored in databases vary dependent on their file format. Section \ref{sec:DocDBs} referred to three 
+major file formats used in document databases - JavaScript Object Notation (JSON), Binary JSON (BSON), and Extensible Markup Language (XML).
+Each of these have their own distinct attributes, which will be thoroughly described in this appendix.
+
+\section{JavaScript Object Notation (JSON)}
+JSON files are\dots
+
+% TODO: Why would I use JSON?
+
+\section{Binary JSON (BSON)}
+BSON files are\dots
+
+% TODO: Why would I use BSON?
+
+\section{Extensible Markup Language (XML)}
+% TODO: Talk about what an XML file actually is.
+
+XML files are not common in many databases in recent times. However, they do still have some benefits not found in JSON or
+BSON, such as the creation of Document Type Definitions (DTDs) where data can be 
+validated as it is retrieved by forming constraints such as what elements exist or what attributes an element can
+or must have. DTDs do not allow for constraining data types (i.e. String, Integer, Float), which is a feature instead
+provided by XML Schemas, an updated schema language that addresses DTD drawbacks through allowing not only type definitions
+but also enforcing uniqueness and foreign key constraints as well as inheritance. Additionally, XML schemas are written
+using XML syntax unlike DTDs. The only considerable drawback of XML schemas are the complexity of writing them, as they can
+be considerably more complicated than DTDs.
+
+% TODO: Show examples of DTDs & Schemas. See Lecture 4.
+% TODO: Talk about XPath, XSLT and XQuery.
+
+\endgroup

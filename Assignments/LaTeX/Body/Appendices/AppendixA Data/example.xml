@@ -1,0 +1,25 @@
+<university-3>
+
+    <department dept name=“Comp. Sci.”>
+        <building> Taylor </building>
+        <budget> 100000 </budget>
+    </department>
+
+    <department dept name=“Biology”>
+        <building> Watson </building>
+        <budget> 90000 </budget>
+    </department>
+
+    <course course id=“CS-101” dept name=“Comp. Sci” instructors=“10101 83821”>
+        <title> Intro. to Computer Science </title>
+        <credits> 4 </credits>
+    </course>
+
+    <instructor IID=“10101” dept name=“Comp. Sci.”>
+        <name> Srinivasan </name>
+        <salary> 65000 </salary>
+    </instructor>
+
+</university-3>
+
+<!-- ? Remember Polacode can screenshot this. ! -->
