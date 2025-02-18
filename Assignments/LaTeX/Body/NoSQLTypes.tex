@@ -15,6 +15,7 @@ for maximum efficiency.
 % ?     Isolation - Concurrent transactions don't interfere with each other.
 % ?     Durability - Changes are saved, even in the event of system failure. 
 % *    https://www.databricks.com/glossary/acid-transactions
+% ! Alternatively, talk about it in the comparison of relational & NoSQL.
 
 \section{Document database}\label{sec:DocDBs}
 % ? MongoDB is a document database.
@@ -31,7 +32,7 @@ They store records as "documents", which store an object's data and metadata, in
     \caption{An example of a JSON Document.\label{fig:ExampleDoc}}
 \end{figure}
 
-\noindent Figure \ref{fig:ExampleDoc} depicts an example JSON document in MongoDB\footnote{MongoDB actually stores data as BSON, though it translates between the two when queried.}, a popular DBMS
+\noindent Figure \ref{fig:ExampleDoc} depicts an example JSON document in MongoDB\footnote{MongoDB actually stores data as BSON, though it translates between the two when queried. See Appendix B for more information.}, a popular DBMS
 for document databases. It contains the data of a singular example school teacher, storing details such as their name, age and subject expertise, as well as a unique internal object ID used by MongoDB to identify that document. The data itself is of varying types including 
 strings, integers and arrays, which makes document databases easily integrable into a development workflow due to the direct 
 storage of object types used in programming languages like Python and JavaScript.
@@ -53,10 +54,21 @@ that retrieving data based on values, such as finding all users over a given age
 making key-value databases best suited for real-time data access and caching where simpler queries are used \autocite{mongodbWhatKeyValueDatabase}.
 
 % TODO: You've spoke of key-value negatives here, so go back and do it for documents too.
-% TODO: Some kind of image for key-value sample data.
-% TODO: What's the difference between key-value and document?
 
-\para Notable software options used across industry for key-value databases include Amazon's DynamoDB \autocite{awsFastNoSQLKeyValue} and Redis \autocite{redisWhatKeyValueDatabase}. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{NoSQL DBs/KeyValue/ExampleKeyVal}
+    \caption{An example key-value pair \autocite{redisWhatKeyValueDatabase}.\label{fig:ExampleKeyVal}}
+\end{figure}
+
+
+\noindent Figure \ref{fig:ExampleKeyVal} depicts an example key-value pair, mapping names to phone numbers. If a query for "Greg" was given, 
+the associated value would be returned. There is a significant similarity between key-value stores and document stores, though key-value stores
+can only store simple key-value pairs, whereas document stores can have flexible schemas of complex, nested structures. Furthermore, as previously 
+mentioned, querying key-value databases is very limited to only simple queries if speed is a decisive factor. 
+
+\para Notable software options used across industry for key-value databases include Amazon's DynamoDB \autocite{awsFastNoSQLKeyValue}, Redis \autocite{redisWhatKeyValueDatabase}, and Memcached \autocite{memcachedMemcachedDistributedMemory}. MongoDB can also be used as a key-value store, though this is
+not its primary intention.
 
 
 \section{Column-oriented database}
