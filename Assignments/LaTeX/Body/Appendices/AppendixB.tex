@@ -8,15 +8,23 @@
 \chapter*{Appendix B - MongoDB installation}
 \addcontentsline{toc}{chapter}{Appendix B - MongoDB installation}
 
-MongoDB is used widely across industry, and as such, there are many versions of the software available. 
-This project made use of the Community Server, a free download with most of MongoDB's key features. An alternative 
+\section{Why MongoDB?}
+
+
+\section{Downloading}
+MongoDB is used widely across industry, and as such, there are multiple versions of the software available dependent
+on the specific use case.
+
+\subsection{Community Server}
+
+This project makes use of the Community Server, a free download with most of MongoDB's key features. An alternative 
 option would have been the Enterprise version, which is widely used across industry and requires users to sign 
 up with a business account. In an actual production environment, the Enterprise version of the MongoDB server 
 would be more beneficial due to its additional features including an in-memory storage engine as well as enhanced 
-security options \autocite{mongodb_mongodb_nodate}, though the Community version still includes the necessary 
+security options \autocite{mongodbMongoDBEnterpriseServer}, though the Community version still includes the necessary 
 core functionality of MongoDB.
 
-\para The community version was downloaded from the \href{https://www.mongodb.com/try/download/community}{official MongoDB website} \autocite{mongodb_try_nodate},
+\para The community version was downloaded from the \href{https://www.mongodb.com/try/download/community}{official MongoDB website} \autocite{mongodbTryMongoDBCommunity},
 using the appropriate installer for a 64-bit Windows 10 system as depicted in Figure \ref{fig:MongoDownload}. Both ZIP and MSI options
 are available, with the MSI being used in this project for simplicity.
 
@@ -25,6 +33,8 @@ are available, with the MSI being used in this project for simplicity.
     \includegraphics[width=.63\textwidth]{Mongo/Installation/MongoDB Community Site.png}
     \caption{The MongoDB Community Server download page.\label{fig:MongoDownload}}
 \end{figure}
+
+\subsection{MongoDB Shell - mongosh}
 
 \noindent With the community server installed, a method to interface with MongoDB such as the official 
 MongoDB shell is necessary, which is available from the same download page.
@@ -47,8 +57,5 @@ which all store meta information about the software itself.
     \caption{The results of the "show dbs" command in the MongoDB shell.\label{fig:ShowDBs}}
 \end{figure}
 
-
-% This maybe doesn't actually have to be an appendix, though I wasn't sure where would be best to address this topic.
-% Consider that it also doesn't really need addressing at all unless you use a hyper-specific feature.
 
 \endgroup
