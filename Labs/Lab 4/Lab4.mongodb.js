@@ -1,15 +1,17 @@
 // ! Compass is a very useful tool that you can use in future. These labs simply demonstrate command-line proficiency,
 // ! though the functionality is even simpler in Compass.
+
+// ? This lab won't give the expected final output unless you run the other JS file in this directory. 
+// ? Normally, that could be done within the code, but the MongoDB VSCode extension doesn't support calling other files.
+// * mongosh --file import-restaurants-sample-db.js     <- From outside the mongo shell and inside this directory.
 use("sample_restaurants")
 
 // Find all restaurants located in the Bronx that serve American cuisine or ice cream.
 // Only returns the cuisine and restaurant name.
 db.restaurants.find(
-    {$and: 
-        [
-            {borough: "Bronx"},
-            {cuisine: {$in: ["American", "Ice Cream, Gelato, Yogurt, Ices"]}}
-        ]
+    {
+        borough: "Bronx",
+        cuisine: {$in: ["American", "Ice Cream, Gelato, Yogurt, Ices"]}
     },
     {_id: 0, cuisine: 1, name: 1}
 )
@@ -87,9 +89,25 @@ db.restaurants.find(
 // ! Limited to 3 as each document is very long.
 
 
-// ! This lab is unfinished. Two update queries and one deletion query have yet to be completed.
-// ? See Lab 4, Slide 48.
+// Changes the restaurant called "Juni" to "American_New".
+db.restaurants.updateOne(
+    {name: "Juni"},
+    {$set: {name: "American_New"}}
+)
 
+// Updates all restaurants with zipcode 10016 to be located in borough DC.
+db.restaurants.updateMany(
+    {"address.zipcode": "10016"},
+    {$set: {borough: "DC"}}
+)
+
+// ! Not part of the lab, counting before deletion.
+db.restaurants.countDocuments({borough: "Staten Island"}) // 969
+
+// Deletes all restaurants located in borough Staten Island.
+db.restaurants.deleteMany(
+    {borough: "Staten Island"}
+)
 
 /*
     Example document:
