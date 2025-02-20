@@ -71,12 +71,31 @@ mentioned, querying key-value databases is very limited to only simple queries i
 not its primary intention.
 
 
-\section{Column-oriented database}
+\section{Wide-column database}
 % * Stores data in columns rather than rows.
-% * Fast reading, slow writing. 
-% * Better for OLAP than OLTP iirc.
-% ! In the scenario, the slow writing means it's unwanted. Client wants IoT sensor data recorded, so it'll be lots of writing.
+% ? You were wrong about this; they're actually fast writing but slow reading.
 % ? Also known as wide-column stores, which may be the preferred term for the module spec.
+
+Wide-column databases, also known as wide-column stores, store data across columns rather than rows, which allows for data schemas built for these 
+databases to be very flexible. Records stored in wide-column stores do not require the same columns for every row, which can greatly help to reduce 
+duplication and redundancy, and storage requirements by extension. Instead, Figure \ref{fig:ExampleWideCol} depicts how wide-column databases can store 
+data in "column groups", which would be defined when the database is created.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{NoSQL DBs/Column/WideColGroups}
+    \caption{An example of wide-column store groups \autocite{poreNoSQLDataArchitecture2018}.\label{fig:ExampleWideCol}}
+\end{figure}
+
+\noindent Column groups are greatly beneficial for \textbf{distributed databases}, which leverage sharding for horizontal scalability. For example,
+one node could store the columns of group A, whereas another stores group B. If done correctly, this can greatly help the speed of queries
+on the database, but it could also cause major slowdowns if the column groups are incorrectly defined. Therefore, column groups should 
+consist of data that is frequently queried together, such as a group for personal information, then another for financial information \autocite{cattellScalableSQLNoSQL2011}. 
+
+% ! Should you have already spoken about sharding before this point?
+
+\para Because of this, wide-column stores are typically used for larger databases reaching petabytes in size, using software implementations such as 
+Google's Bigtable \autocite{changBigtableDistributedStorage2008} and Apache Cassandra \autocite{apacheApacheCassandraApache}.
 
 
 \section{Graph database}
