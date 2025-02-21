@@ -37,7 +37,10 @@ for document databases. It contains the data of a singular example school teache
 strings, integers and arrays, which makes document databases easily integrable into a development workflow due to the direct 
 storage of object types used in programming languages like Python and JavaScript.
 
-% TODO: Has enough been written here?
+\para Groups of documents can then be stored in \textbf{collections}, similar to tables in relational databases. These collections can be queried 
+to perform all CRUD operations. 
+
+% TODO: Talk more about collections.
 
 \para Popular services for document databases include Databricks \autocite{databricksDataAICompany2023} Couchbase \autocite{couchbaseCouchbaseBestFree}, and the previously mentioned MongoDB \autocite{mongodbDocumentDatabaseNoSQL}.
 
@@ -72,8 +75,8 @@ not its primary intention.
 
 
 \section{Wide-column database}
-% * Stores data in columns rather than rows.
-% ? You were wrong about this; they're actually fast writing but slow reading.
+% * Builds on key-value DBs. Stated to have "2 dimensions" which makes sense as it's many values (col groups) to a key I guess?
+% ! This is by far the type I know the least. Researching it doesn't seem to really help. Perhaps ask Konstantinos.
 % ? Also known as wide-column stores, which may be the preferred term for the module spec.
 
 Wide-column databases, also known as wide-column stores, store data across columns rather than rows, which allows for data schemas built for these 
@@ -100,3 +103,36 @@ Google's Bigtable \autocite{changBigtableDistributedStorage2008} and Apache Cass
 
 \section{Graph database}
 % ? Neo4J is a graph database.
+Graph databases differ heavily from the previously mentioned types, and are instead based on mathematical graph theory \autocite{awsWhatGraphDatabase}.
+Rather than storing data as rows and columns (or keys and values), these 
+databases store data as nodes and edges. Nodes are connected through their relationships to other nodes, which form the edges of the graph 
+structure as depicted in Figure \ref{fig:ExampleGraph}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{NoSQL DBs/Graph/ExampleGraph}
+    \caption{Two example nodes connected by a relationship. \autocite{neo4jWhatGraphDatabase}\label{fig:ExampleGraph}}
+\end{figure}
+
+\noindent Graph databases are best suited for data that is highly interconnected, and can achieve extremely fast query speeds in these scenarios
+due to graph traversal, where related nodes can be immediately read through the relationships between them rather than the extensive joins
+that would be required in a relational database equivalent \autocite{corbelliniPersistingBigdataNoSQL2017}. Typical use-cases of these 
+databases include fraud detection, user recommendation systems and identity management \autocite{neo4jGraphDatabaseUse,awsManagedGraphDatabase,memgraphGraphDatabaseVs}.
+
+\para Software typically used for graph databases includes Neo4J \autocite{neo4jNeo4jGraphDatabase2025}, Amazon 
+Neptune \autocite{awsManagedGraphDatabase}, and Memgraph \autocite{memgraphMemgraphDatabase}.
+
+\para An additional key feature of graph databases is that they do not store collections of data together in groups or collections 
+unlike other databases, with this functionality instead being dictated by labels, relationships or properties. 
+
+\subsubsection{Label grouping}
+Nodes can be labelled with a tag (such as "User"), and queries can instead retrieve all nodes sharing a given label.
+
+\subsubsection{Relationship grouping}
+A node is created that represents the group, with all members of the group having a relationship with this parent node such as "Member of".
+
+\subsubsection{Property grouping}
+Nodes individually store a property such as a group ID which identifies their particular group. Queries can then fetch all nodes with the given 
+property to identify members of the group.
+
+% ! Restructure this chapter to divide information across sections. Be mindful of the fact that it's already almost 1k words.
