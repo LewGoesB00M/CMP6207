@@ -1,10 +1,31 @@
 \chapter{Comparing NoSQL and Relational databases} 
 % ! Chapter title doesn't fit the page.
-\begin{itemize}
-    \item This section "shouldn't be too long, but enough to convince them."
-    \item \textbf{This is NOT comparing \textit{MongoDB} to relational databases.} The brief 
-    mentions that it should be "generic just in case after seeing your MongoDB database they decide to go with another software provider."
-\end{itemize}
+
+
+% ? This section "shouldn't be too long, but enough to convince them."
+% ! I'm targeting 1000 - 1250 words.
+% ? This is NOT comparing *MongoDB* to relational databases.
+% ? The brief mentions that it should be "generic just in case after seeing 
+% ? your MongoDB database they decide to go with another software provider."
+
+Industrial needs for fast and efficient data storage continue to grow exponentially year by year, and some of these needs fail to be met 
+by typical relational database solutions. \textcite{corbelliniPersistingBigdataNoSQL2017} state that the types of data that require storage 
+have changed since the first relational database systems of the 1970s, and as such, these more mature systems do not meet the requirements of
+today's businesses with web-oriented systems storing magnitudes of unstructured data. The same can also be said of Internet of Things 
+(IoT) systems, with  \textcite{gubbiInternetThingsIoT2013} stating that 'For the realization of a complete IoT vision, an efficient, secure,
+scalable and market oriented computing and storage resourcing is essential.'
+
+\para These efficient, secure and scalable resources exist in the form of NoSQL databases. Chapter 1 provided an overview of the various 
+types of NoSQL databases, with this chapter instead offering direct comparisons between modern NoSQL solutions to more traditional relational 
+database management systems.
+
+\section{Foundational principles}
+Relational and NoSQL databases are governed by dichotomous foundational principles that fundamentally change their appropriate use cases.
+Relational databases adhere to the ACID model that prioritises absolute integrity and consistency at the expense of both availability and 
+scalability, whereas NoSQL databases adhere to the opposing BASE model, prioritising availability and scalability over consistency.  
+
+\subsection{ACID}
+ACID is an acronym to describe the key attributes of relational database systems:
 
 % TODO: Talk about ACID:
 % ?     Atomicity - A statement is fully executed or not executed at all.
@@ -13,6 +34,29 @@
 % ?     Durability - Changes are saved, even in the event of system failure. 
 % *    https://www.databricks.com/glossary/acid-transactions
 
+\begin{longtable}{ | p{0.2\textwidth} | p{0.7\textwidth} | }
+    \hline
+    \cellcolor{blue!25}Principle & \cellcolor{blue!25}Description\\
+    \hline
+    Atomicity & All transactions must be fully completed or not completed at all. If a transaction fails,
+    the database must be reverted to its prior state with no changes made to the data.  \\
+    \hline
+    Consistency & Data must meet predefined integrity constraints, and remain consistent for all users even in the event 
+    of simultaneous transactions.  \\
+    \hline 
+    Isolation & Transactions are executed sequentially, and do not interfere with each other even if they are simultaneous. \\
+    \hline 
+    Durability & Even in the event of system failure, the database must maintain all committed records. This means that 
+    even if an error occurs, the results of any and all previous transactions must not be lost. \\
+    \hline
+    \caption{The ACID principles of relational databases. \autocite{awsACIDVsBASE,neo4jDataConsistencyModels2023}}\label{tab:ACID}
+\end{longtable}
+
+\noindent ACID is a very strict set of principles that actively enforce a safe environment for data operations. Though, in maintaining 
+such high security, a considerable performance overhead exists with every transaction. This can massively impact the scalability of these 
+databases, as they will grow slower the more users they have. 
+
+\subsection{BASE and the CAP theorem}
 % TODO: Talk about BASE:
 % * A base is the opposite of an acid, hence the name.
 % * Seems to be based on the *perception* of availability rather than the literal availability.
@@ -25,8 +69,20 @@
 % ?     Consistency: Once data is written, it is available to all users of the system immediately.
 % ?     Availability: The service is uninterrupted and without degradation for the majority of the time.
 % ?     Partition Tolerance: Operations can be completed even if part of the network fails.
+% * It's said that a distributed system can only ever achieve two of these.
+% * https://www.ibm.com/think/topics/cap-theorem
+
+\section{Scalability}
+
+
+\subsection{Vertical}
+
+
+\subsection{Horizontal}
 
 % TODO: Talk about horizontal scalability.
-% ?     Why is vertical bad?
+% ?     Why is vertical bad? - It's much more expensive, and you'd probably have downtime during the actual upgrading.
 % ?     Nodes and sharding
+
+\section{Options for this scenario}
 
