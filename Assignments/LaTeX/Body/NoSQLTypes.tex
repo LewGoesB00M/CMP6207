@@ -5,17 +5,11 @@ SQL powers many relational database systems even today, though the problems asso
 the speed of its operations, are beginning to show in modern systems. Therefore, NoSQL ("Not Only SQL") was developed as 
 an extension of SQL, allowing data to be stored in a non-tabular, non-relational format for efficient storage of
 semi-structured and unstructured data in a flexible, functional and scalable model for faster operations than standard 
-relational databases in most scenarios \autocite{googlecloudWhatNoSQLDatabases, awsWhatNoSQLDatabase}. There are a wide variety of NoSQL 
-database types which vary in complexity, functionality and purpose, meaning that identification of the most suitable type is paramount 
-for maximum efficiency. 
+relational databases in most scenarios \autocite{googlecloudWhatNoSQLDatabases, awsWhatNoSQLDatabase}. 
 
-% TODO: Talk about ACID:
-% ?     Atomicity - A statement is fully executed or not executed at all.
-% ?     Consistency - Transactions only occur in predefined ways. (Helps prevent impacts of corruption)
-% ?     Isolation - Concurrent transactions don't interfere with each other.
-% ?     Durability - Changes are saved, even in the event of system failure. 
-% *    https://www.databricks.com/glossary/acid-transactions
-% ! Alternatively, talk about it in the comparison of relational & NoSQL.
+\para There are a wide variety of NoSQL database types - all of which vary in complexity, functionality and purpose, meaning that the
+identification of the most suitable type is paramount for maximum efficiency in terms of speed, storage and scalability. 
+
 
 \section{Document database}\label{sec:DocDBs}
 % ? MongoDB is a document database.
@@ -27,8 +21,8 @@ They store records as "documents", which store an object's data and metadata, in
 % TODO: Finish Appendix A, where you talk about and give examples of each of these. See Lab 4 slides for modelling relationships with JSON.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{NoSQL DBs/Doc/ExampleDoc}
+    \centering  
+    \includegraphics[width=0.6\textwidth]{NoSQL DBs/Doc/ExampleDoc}
     \caption{An example of a JSON Document.\label{fig:ExampleDoc}}
 \end{figure}
 
@@ -37,10 +31,11 @@ for document databases. It contains the data of a singular example school teache
 strings, integers and arrays, which makes document databases easily integrable into a development workflow due to the direct 
 storage of object types used in programming languages like Python and JavaScript.
 
-\para Groups of documents can then be stored in \textbf{collections}, similar to tables in relational databases. These collections can be queried 
-to perform all CRUD operations. 
+\para Relationships in document databases can be modelled with great ease, with the ability for documents to contain other documents. 
+For example, in MongoDB, a document for a social media user may contain the Object ID of each of their posts. Groups of documents can then
+be stored in \textbf{collections}, similar to tables in relational databases. These collections can be queried to perform all CRUD operations. 
 
-% TODO: Talk more about collections.
+% TODO: Talk more about collections and relationship handling.
 
 \para Popular services for document databases include Databricks \autocite{databricksDataAICompany2023} Couchbase \autocite{couchbaseCouchbaseBestFree}, and the previously mentioned MongoDB \autocite{mongodbDocumentDatabaseNoSQL}.
 
@@ -70,8 +65,8 @@ the associated value would be returned. There is a significant similarity betwee
 can only store simple key-value pairs, whereas document stores can have flexible schemas of complex, nested structures. Furthermore, as previously 
 mentioned, querying key-value databases is very limited to only simple queries if speed is a decisive factor. 
 
-\para Notable software options used across industry for key-value databases include Amazon's DynamoDB \autocite{awsFastNoSQLKeyValue}, Redis \autocite{redisWhatKeyValueDatabase}, and Memcached \autocite{memcachedMemcachedDistributedMemory}. MongoDB can also be used as a key-value store, though this is
-not its primary intention.
+\para Notable software options used across industry for key-value databases include Amazon's DynamoDB \autocite{awsFastNoSQLKeyValue}, Redis \autocite{redisWhatKeyValueDatabase}, and Memcached \autocite{memcachedMemcachedDistributedMemory}. MongoDB can also be used as a key-value store,
+though it is not primarily intended to do so.
 
 
 \section{Wide-column database}
@@ -90,16 +85,20 @@ data in "column groups", which would be defined when the database is created.
     \caption{An example of wide-column store groups \autocite{poreNoSQLDataArchitecture2018}.\label{fig:ExampleWideCol}}
 \end{figure}
 
-\noindent Column groups are greatly beneficial for \textbf{distributed databases}, which leverage sharding for horizontal scalability. For example,
-one node could store the columns of group A, whereas another stores group B. If done correctly, this can greatly help the speed of queries
-on the database, but it could also cause major slowdowns if the column groups are incorrectly defined. Therefore, column groups should 
-consist of data that is frequently queried together, such as a group for personal information, then another for financial information \autocite{cattellScalableSQLNoSQL2011}. 
+\noindent Column groups are greatly beneficial for \textbf{distributed databases}, which leverage sharding for horizontal scalability, a concept
+explored further in Chapter 2.
+For example, one node could store the columns of group A, whereas another stores group B. If done correctly, this can greatly help the speed
+of queries on the database, but it could also cause major slowdowns if the column groups are incorrectly defined, such as with data that would
+typically be queried together being split over multiple column groups. Therefore, column groups should consist of data that is frequently 
+queried together, such as a group for personal information, then another for financial information \autocite{cattellScalableSQLNoSQL2011}. 
 
 % ! Should you have already spoken about sharding before this point?
 
-\para Because of this, wide-column stores are typically used for larger databases reaching petabytes in size, using software implementations such as 
-Google's Bigtable \autocite{changBigtableDistributedStorage2008} and Apache Cassandra \autocite{apacheApacheCassandraApache}.
+\para Because of this, wide-column stores are typically used for larger databases reaching petabytes in size, using software implementations such
+as Google's Bigtable \autocite{changBigtableDistributedStorage2008} and Apache Cassandra \autocite{apacheApacheCassandraApache}.
 
+
+\pagebreak
 
 \section{Graph database}
 % ? Neo4J is a graph database.
@@ -134,5 +133,3 @@ A node is created that represents the group, with all members of the group havin
 \subsubsection{Property grouping}
 Nodes individually store a property such as a group ID which identifies their particular group. Queries can then fetch all nodes with the given 
 property to identify members of the group.
-
-% ! Restructure this chapter to divide information across sections. Be mindful of the fact that it's already almost 1k words.

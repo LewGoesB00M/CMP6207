@@ -5,3 +5,28 @@
     \item \textbf{This is NOT comparing \textit{MongoDB} to relational databases.} The brief 
     mentions that it should be "generic just in case after seeing your MongoDB database they decide to go with another software provider."
 \end{itemize}
+
+% TODO: Talk about ACID:
+% ?     Atomicity - A statement is fully executed or not executed at all.
+% ?     Consistency - Transactions only occur in predefined ways. (Helps prevent impacts of corruption)
+% ?     Isolation - Concurrent transactions don't interfere with each other.
+% ?     Durability - Changes are saved, even in the event of system failure. 
+% *    https://www.databricks.com/glossary/acid-transactions
+
+% TODO: Talk about BASE:
+% * A base is the opposite of an acid, hence the name.
+% * Seems to be based on the *perception* of availability rather than the literal availability.
+% ?     Basically Available - One transaction doesn't have to wait for another to complete first.
+% ?     Soft State - The transitional state of records during concurrent updates. Finalised after all transactions complete.
+% ?     Eventually Consistent - When all concurrent transactions are done, it will EVENTUALLY be consistent across all user perspectives.
+% * https://aws.amazon.com/compare/the-difference-between-acid-and-base-database/
+
+% TODO: Talk about the CAP theorem:
+% ?     Consistency: Once data is written, it is available to all users of the system immediately.
+% ?     Availability: The service is uninterrupted and without degradation for the majority of the time.
+% ?     Partition Tolerance: Operations can be completed even if part of the network fails.
+
+% TODO: Talk about horizontal scalability.
+% ?     Why is vertical bad?
+% ?     Nodes and sharding
+
