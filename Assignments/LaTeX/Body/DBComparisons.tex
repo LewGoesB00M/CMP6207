@@ -10,14 +10,14 @@
 
 Industrial needs for fast and efficient data storage continue to grow exponentially year by year, and some of these needs fail to be met 
 by typical relational database solutions. \textcite{corbelliniPersistingBigdataNoSQL2017} state that the types of data that require storage 
-have changed since the first relational database systems of the 1970s, and as such, these more mature systems do not meet the requirements of
+have changed since the first relational database systems of the 1970s, and as such, these more mature systems struggle to meet the requirements of
 today's businesses with web-oriented systems storing magnitudes of unstructured data. The same can also be said of Internet of Things 
 (IoT) systems, with  \textcite{gubbiInternetThingsIoT2013} stating that 'For the realization of a complete IoT vision, an efficient, secure,
 scalable and market oriented computing and storage resourcing is essential.'
 
-\para These efficient, secure and scalable resources exist in the form of NoSQL databases. Chapter 1 provided an overview of the various 
-types of NoSQL databases, with this chapter instead offering direct comparisons between modern NoSQL solutions to more traditional relational 
-database management systems in terms of their scalability and transactional models. 
+\para These efficient, secure and scalable resources exist in the form of NoSQL databases. Chapter 1 provided an overview of NoSQL itself, as well 
+as the various types of NoSQL databases, with this chapter instead offering direct comparisons between modern NoSQL solutions to more traditional
+relational database management systems in terms of their scalability and transactional models. 
 
 
 \section{Scalability}
@@ -33,7 +33,8 @@ databases favouring horizontal scaling, though both are possible in either datab
 Scaling vertically means to upgrade the host device(s) of the database, which refers to the physical swapping or installation of 
 parts such as CPUs, RAM and storage drives to accelerate data processing \autocite{cattellScalableSQLNoSQL2011}. 
 A significant benefit of a vertically scaled database is that data will always be consistent as it is stored on a single device rather than
-distributed across many over a network connection where data could be corrupted, lost or intercepted. This allows for total ACID compliance, which is described further in Section \ref{subsec:ACID}. 
+distributed across many over a network connection where data could be corrupted, lost or intercepted. This allows for total ACID compliance,
+which is described further in Section \ref{subsec:ACID}. 
 
 \para Despite this key benefit, vertical scaling has some downsides. Server components cannot be swapped while the system is online, meaning 
 that scaling vertically \textbf{requires} partial or total system downtime, therefore decreasing availability. Furthermore, vertical scaling 
@@ -43,7 +44,7 @@ significant cost of top-grade server parts potentially outweighing the performan
 \autocite{mongodbGuideHorizontalVs}. Vertical scaling also has a fixed limit - a server can only be as good as the best available components.
 
 
-\subsection{Horizontal scaling}
+\subsection{Horizontal scaling}\label{sec:HorizontalScaling}
 
 Scaling horizontally means to add more devices (nodes) to a network, making the database a \textbf{distributed database}. Rather 
 than having an entire DBMS stored on a single device and single point of failure, horizontal scaling divides the processing and storage 
@@ -76,9 +77,10 @@ is typically more cost-effective than scaling vertically as depicted in Figure \
 despite the increase in availability. The final considerable drawback is the fact that all nodes are connected via a network, which could 
 introduce issues with data transmission, such as the potential for data interception (man-in-the-middle) or corruption (packet loss).
 
-\para Although horizontal scaling does have these drawbacks, many argue that it remains an overall superior practice to vertical scaling. 
-Because horizontal scaling is rarely seen in relational databases, this also means that NoSQL databases will be more useful for large 
-businesses handling considerable amounts of data.
+% \para Although horizontal scaling does have these drawbacks, many argue that it remains an overall superior practice to vertical scaling. 
+% % ! If you reintroduce this paragrpah, who are the "many"?
+% Because horizontal scaling is rarely seen in relational databases, this also means that NoSQL databases will be more useful for large 
+% businesses handling considerable amounts of unstructured data.
 
 
 \section{Transactional models}
@@ -127,8 +129,6 @@ properties to gain the best of both worlds - high speed and scalability from bei
 ACID compliance. However, NoSQL databases cannot be fully ACID compliant due to their architecture, as horizontal scaling while maintaining 
 
 
-
-
 \subsection{BASE}\label{subsec:BASE}
 % TODO: Talk about BASE:
 % * A base is the opposite of an acid, hence the name.
@@ -158,10 +158,45 @@ expected by ACID, the properties of BASE databases are much more relaxed:
 \end{longtable}
 
 \noindent By forfeiting the strict regulations and associated performance overheads of ACID compliance, BASE-compliant databases can 
-theoretically operate at much higher speeds by sacrificing their immediate consistency.
+theoretically operate at much higher speeds by sacrificing their immediate consistency in favour of eventual consistency and workload
+division across many nodes, as was previously noted in Sections \ref{sec:CAPTheorem} and \ref{sec:HorizontalScaling}.
 
+% TODO:
+% ?     Overall unhappy with the BASE section. Minimal detail due to lack of understanding which compromises the integrity of the work. 
 
 % ! A very text-heavy section (and CHAPTER, at that.). Add images maybe?
-% ! While you've definitely described all the terms well, have you actually even compared the DB types at all?
+% ! Vertical scaling got two paragraphs but horizontal got a whole page. Consider reducing one or increasing the other.
 
 \section{Overall summary}
+In conclusion of all factors discussed across Chapters 1 and 2, the best option for IoThings will be to leverage the heightened capabilities
+of a NoSQL database, specifically a \textbf{document store}, to store and query their sensor activation data.
+
+\subsection{Why not a relational database?}
+It is unlikely that IoThings will see much benefit from a relational database solution as they require \textbf{high scalability}, which is 
+best offered by distributed NoSQL systems. As a home automation company, IoThings will likely be storing sensor readings at regular intervals,
+better known as \textbf{time-series data}. If this interval were 30 seconds, and they had 10,000 users, they would be storing 600,000 values 
+a minute or 864,000,000 a day. It is not unheard of for this to be done in relational systems, though the previously mentioned lack 
+of horizontal scalability of these systems mean that user demand will quickly outpace any vertical scaling that could be performed,
+possibly through the sheer storage requirement alone.
+
+\subsection{Why use a document store?}
+Based on the specific needs of the company, the best type of NoSQL database to use will be a \textbf{document store}.
+Within the document store, JSON/BSON objects each containing the various sensor outputs can be stored and queried with great ease and 
+high speed. The programmatic storage of these objects using common types for languages like JavaScript and Python allows for direct 
+integration with the IoT device's code, where sensor readings could be directly sent to the DB as part of the device's standard operations,
+as document stores excel in storing data of varying types, with time-series data from a thermostat containing the current date and time 
+(ISODate type in JavaScript) and temperature (Integer or Double if decimals included) for example. 
+One of the software options for this approach, MongoDB, already includes guides for this process in their documentation
+\autocite{mongodbModelIoTData}.
+
+% ! Possible colossal error:
+% ?     Page 4 of the brief says to compare the relational approach with SPECIFICALLY A DOCUMENT STORE.
+% ?     Though later on it then says comparison of relational and NoSQL databases, plural.
+% TODO: You will NEED clarification on this, though it doesn't have to come any time soon (report due May 5).
+% * I think an optimal approach, while certainly painful to do, would be to keep this file but also make a new one 
+% * specifically comparing relational & document, showing how each would store data. That might have been the main intention here.
+% * Elements of this could still be kept in that scenario.
+
+% ? Additional note regarding Chapter 1:
+% ?     Week 5's lecture says column stores and WIDE column stores are NOT THE SAME.
+% ?     Which am I meant to write about in this assignment then?

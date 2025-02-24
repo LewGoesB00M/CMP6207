@@ -5,7 +5,10 @@ SQL powers many relational database systems even today, though the problems asso
 the speed of its operations, are beginning to show in modern systems. Therefore, NoSQL ("Not Only SQL") was developed as 
 an extension of SQL, allowing data to be stored in a non-tabular, non-relational format for efficient storage of
 semi-structured and unstructured data in a flexible, functional and scalable model for faster operations than standard 
-relational databases in most scenarios \autocite{googlecloudWhatNoSQLDatabases, awsWhatNoSQLDatabase}. 
+relational databases in most scenarios \autocite{googlecloudWhatNoSQLDatabases, awsWhatNoSQLDatabase}. It is important to understand 
+that NoSQL is \textbf{an extension} to SQL, designed to assist in the storage of unstructured data, which is a growing need across 
+many industries \autocite{corbelliniPersistingBigdataNoSQL2017}, and not a total replacement, as there are still some benefits to 
+standard relational databases that are not always offered by NoSQL alternatives, which are discussed in Chapter 2. 
 
 \para There are a wide variety of NoSQL database types - all of which vary in complexity, functionality and purpose, meaning that the
 identification of the most suitable type is paramount for maximum efficiency in terms of speed, storage and scalability. 
@@ -134,7 +137,7 @@ A node is created that represents the group, with all members of the group havin
 Nodes individually store a property such as a group ID which identifies their particular group. Queries can then fetch all nodes with the given 
 property to identify members of the group.
 
-\section{The CAP theorem}
+\section{The CAP theorem}\label{sec:CAPTheorem}
 % TODO: Talk about the CAP theorem:
 % ?     Consistency: Once data is written, it is available to all users of the system immediately.
 % ?     Availability: The service is uninterrupted and without degradation for the majority of the time.
