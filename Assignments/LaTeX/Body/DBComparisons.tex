@@ -17,15 +17,62 @@ scalable and market oriented computing and storage resourcing is essential.'
 
 \para These efficient, secure and scalable resources exist in the form of NoSQL databases. Chapter 1 provided an overview of the various 
 types of NoSQL databases, with this chapter instead offering direct comparisons between modern NoSQL solutions to more traditional relational 
-database management systems.
+database management systems in terms of their scalability and transactional models.
 
-\section{Foundational principles}
-Relational and NoSQL databases are governed by dichotomous foundational principles that fundamentally change their appropriate use cases.
-Relational databases adhere to the ACID model that prioritises absolute integrity and consistency at the expense of both availability and 
-scalability, whereas NoSQL databases adhere to the opposing BASE model, prioritising availability and scalability over consistency.  
+\section{The CAP theorem}
+% TODO: Talk about the CAP theorem:
+% ?     Consistency: Once data is written, it is available to all users of the system immediately.
+% ?     Availability: The service is uninterrupted and without degradation for the majority of the time.
+% ?     Partition Tolerance: Operations can be completed even if part of the network fails.
+% * It's said that a distributed system can only ever achieve two of these.
+% * https://www.ibm.com/think/topics/cap-theorem
 
-\subsection{ACID}
-ACID is an acronym to describe the key attributes of relational database systems:
+\section{Scalability}
+Both \textcite{ganiSurveyIndexingTechniques2016} and \textcite{katalBigDataIssues2013} state that the amount of data stored by companies 
+is increasing at an extreme rate, forecasting that companies will likely be storing \textit{zettabytes} of data in the near future.
+Because of this, \textcite{gubbiInternetThingsIoT2013}'s previously mentioned efficient and scalable storage solutions are needed to meet 
+these ever-increasing demands.
+
+\para Databases can be scaled both vertically and horizontally, with relational databases typically favouring vertical scaling and NoSQL 
+databases favouring horizontal scaling, though both are possible in either database type. 
+
+\subsection{Vertical scaling}
+Scaling vertically means to upgrade the host device(s) of the database, which refers to the physical swapping or installation of 
+parts such as CPUs, RAM and storage drives to accelerate data processing \autocite{cattellScalableSQLNoSQL2011}. 
+A significant benefit of a vertically scaled database is that data will always be consistent as it is stored on a single device rather than
+distributed across many over a network connection where data could be corrupted, lost or intercepted. This allows for total ACID compliance which is described further in Section \ref{subsec:ACID}. 
+
+\para Despite this key benefit, vertical scaling has some downsides. Server components cannot be swapped while the system is online, meaning 
+that scaling vertically \textbf{requires} partial or total system downtime, therefore decreasing availability. Furthermore, vertical scaling 
+introduces a single point of failure to a system, where the powerful server hosting the database could experience any issue such as a power cut 
+that would cause a total system outage. Continuous vertical scaling can also become very costly and bear diminishing returns, with the 
+significant cost of top-grade server parts potentially outweighing the performance benefit of their installation.  
+
+% ! A very text-heavy section (and CHAPTER, at that.). Add images maybe?
+
+\subsection{Horizontal scaling}
+
+% TODO: Talk about horizontal scalability.
+% ?     Nodes and sharding
+
+Scaling horizontally means to add more devices (nodes) to a network, making the database a \textbf{distributed database}. Rather 
+than having an entire DBMS stored on a single device and single point of failure, horizontal scaling divides the processing and storage 
+loads of the database over many nodes. 
+
+
+
+
+\section{Transactional models}
+Relational and NoSQL databases are governed by dichotomous transactional models that fundamentally change their appropriate use cases.
+Relational databases are designed to adhere to the ACID model that prioritises absolute integrity and consistency at the expense of 
+both availability and scalability, whereas most NoSQL databases adhere to the opposing BASE model, prioritising availability and scalability
+over consistency. However, ACID is not exclusive to relational databases, and recent updates to certain NoSQL databases like MongoDB have 
+allowed partial ACID compliance in combination with the scalability benefits of NoSQL.
+
+
+
+\subsection{ACID}\label{subsec:ACID}
+ACID is an acronym to describe the following key attributes:
 
 % TODO: Talk about ACID:
 % ?     Atomicity - A statement is fully executed or not executed at all.
@@ -36,7 +83,7 @@ ACID is an acronym to describe the key attributes of relational database systems
 
 \begin{longtable}{ | p{0.2\textwidth} | p{0.7\textwidth} | }
     \hline
-    \cellcolor{blue!25}Principle & \cellcolor{blue!25}Description\\
+    \cellcolor{blue!25}Property & \cellcolor{blue!25}Description\\
     \hline
     Atomicity & All transactions must be fully completed or not completed at all. If a transaction fails,
     the database must be reverted to its prior state with no changes made to the data.  \\
@@ -49,14 +96,21 @@ ACID is an acronym to describe the key attributes of relational database systems
     Durability & Even in the event of system failure, the database must maintain all committed records. This means that 
     even if an error occurs, the results of any and all previous transactions must not be lost. \\
     \hline
-    \caption{The ACID principles of relational databases. \autocite{awsACIDVsBASE,neo4jDataConsistencyModels2023}}\label{tab:ACID}
+    \caption{The key properties of ACID compliance. \autocite{awsACIDVsBASE,neo4jDataConsistencyModels2023}}\label{tab:ACID}
 \end{longtable}
 
-\noindent ACID is a very strict set of principles that actively enforce a safe environment for data operations. Though, in maintaining 
-such high security, a considerable performance overhead exists with every transaction. This can massively impact the scalability of these 
-databases, as they will grow slower the more users they have. 
+\noindent ACID is a very strict model that actively enforces a safe environment for data operations. Though, in maintaining 
+such high security, a performance overhead exists with every transaction. This can massively impact the scalability of relational 
+databases with complex join operations, which will grow slower the more users they have. 
 
-\subsection{BASE and the CAP theorem}
+\para ACID compliance is not exclusive to relational databases, however; in recent years, some NoSQL databases have incorporated ACID 
+properties to gain the best of both worlds - high speed and scalability from being non-relational, and high security and integrity from 
+ACID compliance. However, NoSQL databases cannot be fully ACID compliant due to their architecture, as horizontal scaling while maintaining 
+ 
+
+
+
+\subsection{BASE}
 % TODO: Talk about BASE:
 % * A base is the opposite of an acid, hence the name.
 % * Seems to be based on the *perception* of availability rather than the literal availability.
@@ -65,24 +119,28 @@ databases, as they will grow slower the more users they have.
 % ?     Eventually Consistent - When all concurrent transactions are done, it will EVENTUALLY be consistent across all user perspectives.
 % * https://aws.amazon.com/compare/the-difference-between-acid-and-base-database/
 
-% TODO: Talk about the CAP theorem:
-% ?     Consistency: Once data is written, it is available to all users of the system immediately.
-% ?     Availability: The service is uninterrupted and without degradation for the majority of the time.
-% ?     Partition Tolerance: Operations can be completed even if part of the network fails.
-% * It's said that a distributed system can only ever achieve two of these.
-% * https://www.ibm.com/think/topics/cap-theorem
+% ! I don't understand transient states and convergence; how can two opposite transactions merge to one eventual state?
 
-\section{Scalability}
+BASE-compliant databases operate very differently to their ACID counterparts. Rather than the strict integrity and consistency procedures
+expected by ACID, the properties of BASE databases are much more relaxed:
+
+\begin{longtable}{ | p{0.3\textwidth} | p{0.6\textwidth} | }
+    \hline
+    \cellcolor{blue!25}Property & \cellcolor{blue!25}Description\\
+    \hline
+    Basically Available & Systems will continue to operate even if failures occur due to redundancy and replication.  \\
+    \hline
+    Soft State & Replicas do not have to be entirely consistent with each other. This means the system 
+    can be in two different states simultaneously, which is known as a transient state.\\
+    \hline 
+    Eventually Consistent & While updates are not occurring, transient states will converge. \\
+    \hline
+    \caption{BASE properties. \autocite{corbelliniPersistingBigdataNoSQL2017,cattellScalableSQLNoSQL2011,neo4jDataConsistencyModels2023,awsACIDVsBASE}}\label{tab:BASE}
+\end{longtable}
+
+\noindent By forfeiting the strict regulations and associated performance overheads of ACID compliance, BASE-compliant databases can 
+theoretically operate at much higher speeds by sacrificing their immediate consistency.
 
 
-\subsection{Vertical}
-
-
-\subsection{Horizontal}
-
-% TODO: Talk about horizontal scalability.
-% ?     Why is vertical bad? - It's much more expensive, and you'd probably have downtime during the actual upgrading.
-% ?     Nodes and sharding
-
-\section{Options for this scenario}
+% ! While you've definitely described all the terms well, have you actually even compared the DB types at all?
 
