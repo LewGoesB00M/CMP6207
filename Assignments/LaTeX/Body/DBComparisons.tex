@@ -17,15 +17,8 @@ scalable and market oriented computing and storage resourcing is essential.'
 
 \para These efficient, secure and scalable resources exist in the form of NoSQL databases. Chapter 1 provided an overview of the various 
 types of NoSQL databases, with this chapter instead offering direct comparisons between modern NoSQL solutions to more traditional relational 
-database management systems in terms of their scalability and transactional models.
+database management systems in terms of their scalability and transactional models. 
 
-\section{The CAP theorem}
-% TODO: Talk about the CAP theorem:
-% ?     Consistency: Once data is written, it is available to all users of the system immediately.
-% ?     Availability: The service is uninterrupted and without degradation for the majority of the time.
-% ?     Partition Tolerance: Operations can be completed even if part of the network fails.
-% * It's said that a distributed system can only ever achieve two of these.
-% * https://www.ibm.com/think/topics/cap-theorem
 
 \section{Scalability}
 Both \textcite{ganiSurveyIndexingTechniques2016} and \textcite{katalBigDataIssues2013} state that the amount of data stored by companies 
@@ -40,26 +33,52 @@ databases favouring horizontal scaling, though both are possible in either datab
 Scaling vertically means to upgrade the host device(s) of the database, which refers to the physical swapping or installation of 
 parts such as CPUs, RAM and storage drives to accelerate data processing \autocite{cattellScalableSQLNoSQL2011}. 
 A significant benefit of a vertically scaled database is that data will always be consistent as it is stored on a single device rather than
-distributed across many over a network connection where data could be corrupted, lost or intercepted. This allows for total ACID compliance which is described further in Section \ref{subsec:ACID}. 
+distributed across many over a network connection where data could be corrupted, lost or intercepted. This allows for total ACID compliance, which is described further in Section \ref{subsec:ACID}. 
 
 \para Despite this key benefit, vertical scaling has some downsides. Server components cannot be swapped while the system is online, meaning 
 that scaling vertically \textbf{requires} partial or total system downtime, therefore decreasing availability. Furthermore, vertical scaling 
 introduces a single point of failure to a system, where the powerful server hosting the database could experience any issue such as a power cut 
 that would cause a total system outage. Continuous vertical scaling can also become very costly and bear diminishing returns, with the 
-significant cost of top-grade server parts potentially outweighing the performance benefit of their installation.  
+significant cost of top-grade server parts potentially outweighing the performance benefit of their installation 
+\autocite{mongodbGuideHorizontalVs}. Vertical scaling also has a fixed limit - a server can only be as good as the best available components.
 
-% ! A very text-heavy section (and CHAPTER, at that.). Add images maybe?
 
 \subsection{Horizontal scaling}
 
-% TODO: Talk about horizontal scalability.
-% ?     Nodes and sharding
-
 Scaling horizontally means to add more devices (nodes) to a network, making the database a \textbf{distributed database}. Rather 
 than having an entire DBMS stored on a single device and single point of failure, horizontal scaling divides the processing and storage 
-loads of the database over many nodes. 
+loads of the database over many nodes, often through a process called \textbf{sharding}, which involves splitting records into independent 
+partitions (shards) based on criteria like ID numbers \autocite{corbelliniPersistingBigdataNoSQL2017}, and replicating these shards over multiple 
+nodes. Horizontal scaling is seen almost exclusively with NoSQL databases, as the normalized data models and ACID compliance of relational 
+databases mean that scaling horizontally is not feasible \autocite{hechtNoSQLEvaluationUse2011}. 
+
+\para Horizontal scaling introduces considerable benefits for availability, as one node can fail, but the database can continue working 
+without it, which allows for maintenance or the addition of extra nodes with minimal to no downtime at all \autocite{mongodbGuideHorizontalVs}.
+Furthermore, the aforementioned processing load balancing means that each node doesn't require considerable investment in 
+top-grade parts, as nodes can balance processing among themselves. Also, horizontal scaling has no fixed limit unlike vertical scaling, as 
+a theoretically infinite amount of nodes can be added dependent on existing network infrastructure, though this would add considerable 
+complication to the overall system before long. It is for these reasons that thousands of large enterprises,
+including industry titans like Google and Amazon, leverage horizontal scaling of their database systems to maximise their processing speeds
+and maximise availability \autocite{changBigtableDistributedStorage2008,amazonModernizingAmazonDatabase2021}. 
+
+\para Despite the wide adoption and considerable benefits, horizontal scaling is not without its own drawbacks. 
+Initialising a database with many nodes will introduce a larger initial setup cost, though further upgrades by adding additional nodes 
+is typically more cost-effective than scaling vertically as depicted in Figure \ref{fig:ScalingCostOverTime}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Comparisons/CostOverTime}
+    \caption{An example cost/time graph with each scaling method. \autocite{mongodbGuideHorizontalVs}\label{fig:ScalingCostOverTime}}
+\end{figure}
 
 
+\noindent Additionally, the sharding process relies on \textbf{replication}, meaning that data will be duplicated, reducing storage efficiency
+despite the increase in availability. The final considerable drawback is the fact that all nodes are connected via a network, which could 
+introduce issues with data transmission, such as the potential for data interception (man-in-the-middle) or corruption (packet loss).
+
+\para Although horizontal scaling does have these drawbacks, many argue that it remains an overall superior practice to vertical scaling. 
+Because horizontal scaling is rarely seen in relational databases, this also means that NoSQL databases will be more useful for large 
+businesses handling considerable amounts of data.
 
 
 \section{Transactional models}
@@ -106,11 +125,11 @@ databases with complex join operations, which will grow slower the more users th
 \para ACID compliance is not exclusive to relational databases, however; in recent years, some NoSQL databases have incorporated ACID 
 properties to gain the best of both worlds - high speed and scalability from being non-relational, and high security and integrity from 
 ACID compliance. However, NoSQL databases cannot be fully ACID compliant due to their architecture, as horizontal scaling while maintaining 
- 
 
 
 
-\subsection{BASE}
+
+\subsection{BASE}\label{subsec:BASE}
 % TODO: Talk about BASE:
 % * A base is the opposite of an acid, hence the name.
 % * Seems to be based on the *perception* of availability rather than the literal availability.
@@ -142,5 +161,7 @@ expected by ACID, the properties of BASE databases are much more relaxed:
 theoretically operate at much higher speeds by sacrificing their immediate consistency.
 
 
+% ! A very text-heavy section (and CHAPTER, at that.). Add images maybe?
 % ! While you've definitely described all the terms well, have you actually even compared the DB types at all?
 
+\section{Overall summary}

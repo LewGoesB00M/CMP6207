@@ -133,3 +133,46 @@ A node is created that represents the group, with all members of the group havin
 \subsubsection{Property grouping}
 Nodes individually store a property such as a group ID which identifies their particular group. Queries can then fetch all nodes with the given 
 property to identify members of the group.
+
+\section{The CAP theorem}
+% TODO: Talk about the CAP theorem:
+% ?     Consistency: Once data is written, it is available to all users of the system immediately.
+% ?     Availability: The service is uninterrupted and without degradation for the majority of the time.
+% ?     Partition Tolerance: Operations can be completed even if part of the network fails.
+% * It's said that a distributed system can only ever achieve two of these.
+% * https://www.ibm.com/think/topics/cap-theorem
+The CAP theorem \autocite{brewerRobustDistributedSystems2000} is a foundational governing principle of all distributed systems. He stated that any 
+system that shares data across devices can only ever have two of the following three properties:
+
+\begin{longtable}{ | p{0.3\textwidth} | p{0.6\textwidth} | }
+    \hline
+    \cellcolor{blue!25}Property & \cellcolor{blue!25}Description\\
+    \hline
+    Consistency & All clients see the same data at the same time, irrespective of the node they're connected to.\\
+    \hline
+    Availability & A response is always given to a client request, even if a node (or multiple) is down.\\
+    \hline
+    Partition Tolerance & The system must continue to operate even if nodes temporarily lose connection to each other.\\
+    \hline
+    \caption{The properties of the CAP theorem. \autocite{brewerRobustDistributedSystems2000,ibmWhatCAPTheorem2022}}\label{tab:CAPTheorem}
+\end{longtable}
+
+\noindent The CAP theorem is vitally important in the selection of which NoSQL database type to use, as different DBMS adhere to different 
+properties of the theorem, with none being able to offer all three as stated by Brewer. 
+
+\para For example, the document database MongoDB adheres to Consistency and Partition Tolerance (CP), but is unable to 
+offer total availability because of this. This is because ensuring CP means that data between nodes cannot be inconsistent, so if nodes fail to 
+synchronise data, the availability would have to suffer to stop potentially outdated data being returned.
+
+\para Another example is the wide-column store Apache Cassandra, which offers Availability and Partition Tolerance (AP), but 
+therefore cannot offer total consistency. Cassandra instead offers "eventual consistency" through the BASE transactional model, which is 
+described in Section \ref{subsec:BASE}, where clients can potentially see outdated data during simultaneous queries, though the DBMS aims 
+to resolve inconsistencies as quickly as possible.
+
+\para \textcite{ibmWhatCAPTheorem2022} write that consistency and availability (CA) cannot exist simultaneously in 
+NoSQL distributed systems, as this would come at the expense of Partition Tolerance which is not possible in a distributed system. 
+Instead, a relational database would have to be used to offer both of these.
+
+% ! I don't know where it'd be best to talk about the CAP theorem.
+% ! I'm not massively happy with some of the explanations in this chapter as I feel they can be vague or perhaps even outright wrong.
+% ! It's not a huge issue, as I believe this area is ~20% of the assignment's grade, with the actual MongoDB part being the majority.
