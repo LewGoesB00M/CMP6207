@@ -1,0 +1,31 @@
+This lab doesn't really have any code.
+It revolves around the console commands used to form replication sets.
+
+It's likely that when you try this, it won't work because MongoDB runs as a service on startup.
+To stop this and allow this lab to work, you must run "net stop mongodb" in Admin CMD.
+
+First, create the folders db1, db2 and db3. mongod won't make them for you and will just error if they don't exist, 
+so they need to be made prior to anything else.
+
+Then, run one line per terminal window:
+    mongod --dbpath="db1" --replSet "rs0" --port 27017
+    mongod --dbpath="db2" --replSet "rs0" --port 27018
+    mongod --dbpath="db3" --replSet "rs0" --port 27019
+
+* NOTE: These folders will be 200MB each minimum.
+
+After that, run mongosh on port 27017. "mongosh --port 27017".
+
+If all has gone well, that shell shouldn't return an error if you run "rs.initiate()".
+Provided that's the case, you then need to run:
+    rs.add("localhost:27018")
+    rs.add("localhost:27019")
+to add the nodes.
+
+You can then query it in Compass or JS as normal.
+By adding a record to the primary server and then killing it (CTRL+C its associated CMD), it should still be found by other nodes.
+Furthermore, a new primary node should automatically be established by MongoDB.
+
+
+* NOTE: This lab sheet uses Python code for the first time in all 10 weeks so far? 
+        It was stated that this module doesn't actually need you to do JS, but then why wouldn't they just do Python from the start?
