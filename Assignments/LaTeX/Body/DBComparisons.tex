@@ -1,5 +1,8 @@
-\chapter{Comparing NoSQL and Relational databases} 
-% ! Chapter title doesn't fit the page.
+% \chapter{Comparing NoSQL and Relational databases} 
+% ! That chapter title doesn't fit the page.
+
+
+\chapter{NoSQL vs. Relational databases} 
 
 
 % ? This section "shouldn't be too long, but enough to convince them."
@@ -64,7 +67,7 @@ and maximise availability \autocite{changBigtableDistributedStorage2008,amazonMo
 
 \para Despite the wide adoption and considerable benefits, horizontal scaling is not without its own drawbacks. 
 Initialising a database with many nodes will introduce a larger initial setup cost, though further upgrades by adding additional nodes 
-is typically more cost-effective than scaling vertically as depicted in Figure \ref{fig:ScalingCostOverTime}
+is typically more cost-effective than scaling vertically as depicted in Figure \ref{fig:ScalingCostOverTime}.
 
 \begin{figure}[H]
     \centering
@@ -90,7 +93,7 @@ both availability and scalability, whereas most NoSQL databases adhere to the op
 over consistency. However, ACID is not exclusive to relational databases, and recent updates to certain NoSQL databases like MongoDB have 
 allowed partial ACID compliance in combination with the scalability benefits of NoSQL.
 
-
+\newpage
 
 \subsection{ACID}\label{subsec:ACID}
 ACID is an acronym to describe the following key attributes:

@@ -25,11 +25,12 @@ They store records as "documents", which store an object's data and metadata, in
 
 \begin{figure}[H]
     \centering  
-    \includegraphics[width=0.6\textwidth]{NoSQL DBs/Doc/ExampleDoc}
+    \includegraphics[width=0.5\textwidth]{NoSQL DBs/Doc/ExampleDoc}
     \caption{An example of a JSON Document.\label{fig:ExampleDoc}}
 \end{figure}
 
-\noindent Figure \ref{fig:ExampleDoc} depicts an example JSON document in MongoDB\footnote{MongoDB actually stores data as BSON, though it translates between the two when queried. See Appendix B for more information.}, a popular DBMS
+% \footnote{MongoDB actually stores data as BSON, though it translates between the two when queried. See Appendix B for more information.}
+\noindent Figure \ref{fig:ExampleDoc} depicts an example JSON document in MongoDB, a popular DBMS
 for document databases. It contains the data of a singular example school teacher, storing details such as their name, age and subject expertise, as well as a unique internal object ID used by MongoDB to identify that document. The data itself is of varying types including 
 strings, integers and arrays, which makes document databases easily integrable into a development workflow due to the direct 
 storage of object types used in programming languages like Python and JavaScript.
@@ -58,7 +59,7 @@ making key-value databases best suited for real-time data access and caching whe
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{NoSQL DBs/KeyValue/ExampleKeyVal}
+    \includegraphics[width=0.6\textwidth]{NoSQL DBs/KeyValue/ExampleKeyVal}
     \caption{An example key-value pair \autocite{redisWhatKeyValueDatabase}.\label{fig:ExampleKeyVal}}
 \end{figure}
 

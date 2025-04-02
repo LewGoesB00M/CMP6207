@@ -1,3 +1,32 @@
 \chapter{Database design and implementation}
 
-MongoDB, an acronym from "hu\textbf{mongo}us \textbf{DB}", aims to address some of SQL's antiquation issues\dots
+% MongoDB, an acronym from "hu\textbf{mongo}us \textbf{DB}", aims to address some of SQL's antiquation issues\dots
+
+\section{Target problem}
+\subsection{Clientele}
+IoThings are a UK-based small-to-medium sized enterprise specialising in Internet of Things home automation systems.
+Specifically, they install sensors and use MQ Telemetry Transport (MQTT) to collect their activation data and store it in 
+a MongoDB database for analytical purposes. These sensors can be used for a variety of reasons, such as:
+
+\begin{itemize}
+    \item Temperature control
+    \item Lighting control 
+    \item Entertainment management 
+    \item Home security
+\end{itemize}
+
+\subsection{Existing systems}
+IoThings already have an extensive data storage solution for their Enterprise Resource Planning (ERP), Customer Relationship 
+Management (CRM), finances, order processing / sales, and logistics. However, they do not presently have an optimal solution for 
+their MQTT sensor activation data.  
+
+
+\subsection{Requested solution}
+Therefore, IoThings wish to extend their current data storage implementation with an additional NoSQL database to contain their 
+sensor activation data for the eventual purpose of giving feedback to their users about device usage. In addition to the 
+creation of this database, the client also requests the development of an API and frontend for accessing and processing the 
+stored data.
+
+\para Due to data security and privacy concerns, it is not possible for IoThings to provide data of their own. Therefore, 
+the solution developed in this report will use synthetic data which aims to replicate the data which would theoretically 
+be stored.
